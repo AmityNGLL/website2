@@ -8,6 +8,7 @@ import { epoxyPath } from "@mercuryworkshop/epoxy-transport";
 import { baremuxPath } from "@mercuryworkshop/bare-mux/node";
 import { createRequire } from "node:module";
 import { viteStaticCopy } from "vite-plugin-static-copy";
+import cloudflare from '@astrojs/cloudflare';
 
 // LOAD RUNTIME FIRST
 // RUNTIME WILL COPY THE EXAMPLE CONFIG IF IT DOESNT EXIST
@@ -23,9 +24,7 @@ const rufflePath = path.resolve(require.resolve("@ruffle-rs/ruffle"), "..");
 // https://astro.build/config
 export default defineConfig({
   output: "server",
-  adapter: node({
-    mode: "middleware",
-  }),
+  adapter: cloudflare(),
   // used for dev server
   server: {
     port: appConfig.port,
